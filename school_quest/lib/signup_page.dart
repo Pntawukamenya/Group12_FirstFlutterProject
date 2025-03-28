@@ -32,7 +32,6 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -41,7 +40,6 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
         child: Stack(
           children: [
-
             Positioned(
               top: 0,
               right: 0,
@@ -53,13 +51,11 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
 
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
 
                   // Email Field
                   Container(
@@ -89,7 +85,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   const SizedBox(height: 20),
-
 
                   // Username Field
                   Container(
@@ -189,7 +184,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFF9A86A),
@@ -217,7 +211,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               Navigator.pushNamed(context, '/signin');
                             },
                             style: ElevatedButton.styleFrom(
-
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 15),
                               shape: RoundedRectangleBorder(
@@ -250,10 +243,6 @@ class CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
   }
 
   @override

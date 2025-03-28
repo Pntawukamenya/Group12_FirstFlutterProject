@@ -21,6 +21,7 @@ class TopCurveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
+    // Top curve
     path.moveTo(0, 0);
     path.lineTo(size.width * 0.6, 0);
     path.quadraticBezierTo(size.width * 0.7, size.height * 0.1,
@@ -71,6 +72,8 @@ class WelcomePage extends StatelessWidget {
             height: double.infinity,
             color: const Color(0xFFE6F1FD),
           ),
+
+          // Top curve shape
           Positioned(
             top: 0,
             left: 0,
@@ -83,6 +86,8 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ),
+
+          // Bottom curve shape
           Positioned(
             bottom: 0,
             right: 0,
@@ -95,6 +100,8 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ),
+
+          // Content
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

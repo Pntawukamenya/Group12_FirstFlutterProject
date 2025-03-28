@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +14,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-
       ),
       home: const SignInScreen(),
     );
@@ -40,7 +38,6 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Center(
           child: Container(
             width: double.infinity,
-
             margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: const Color(0xFFF2F9FF),
@@ -59,7 +56,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Container(),
                   ),
                 ),
-
                           child: Text(
                             'Sign-In',
                             style: TextStyle(
@@ -70,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-
+                
                       // Username Field
                       Container(
                         decoration: BoxDecoration(
@@ -138,13 +134,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-
                               Navigator.pushNamed(context, '/forgotpassword');
                             },
                             child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
-
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -158,7 +152,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           // Login Button
                           Expanded(
                             child: ElevatedButton(
-
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -174,7 +167,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                 Navigator.pushNamed(context, '/signup');
                               },
                               style: ElevatedButton.styleFrom(
-
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -195,7 +187,6 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
-
 
 class CurvePainter extends CustomPainter {
   @override

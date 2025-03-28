@@ -67,7 +67,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF003366),
                     padding: const EdgeInsets.symmetric(vertical: 15),
