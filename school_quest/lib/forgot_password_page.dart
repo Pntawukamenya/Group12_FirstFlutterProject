@@ -1,7 +1,71 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
+
+  @override
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
+
+  Future<void> _sendPasswordResetEmail() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      if (_emailController.text.trim().isEmpty) {
+        throw FirebaseAuthException(
+            code: 'empty-email', message: 'Email cannot be empty');
+      }
+
+      // Create Dynamic Link parameters
+      final DynamicLinkParameters parameters = DynamicLinkParameters(
+        uriPrefix: 'https://schoolquest.page.link',
+        link: Uri.parse(
+            'https://schoolquest.page.link/reset?email=${_emailController.text.trim()}'),
+        androidParameters: const AndroidParameters(
+          packageName: 'com.example.school_quest',
+        ),
+      );
+
+      // Build short Dynamic Link
+      final ShortDynamicLink shortLink =
+          await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+      final Uri resetUrl = shortLink.shortUrl;
+      print('Short link created: ${shortLink.shortUrl}');
+      await _auth.sendPasswordResetEmail(email: _emailController.text.trim());
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password reset email sent successfully')),
+      );
+      Navigator.pushNamed(context, '/emailverification');
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'invalid-email':
+          errorMessage = 'Invalid email format';
+          break;
+        case 'user-not-found':
+          errorMessage = 'No user found with this email';
+          break;
+        default:
+          errorMessage = 'An error occurred. Please try again';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +87,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                'To reset your password, you need your email or mobile number that can be authenticated',
+                'To reset your password, enter your email',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -49,6 +113,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: 'Example: Jean@gmail.com',
                   filled: true,
@@ -63,9 +128,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/emailverification');
-                  },
+                  onPressed: _isLoading ? null : _sendPasswordResetEmail,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF003366),
                     padding: const EdgeInsets.symmetric(vertical: 15),
@@ -73,14 +136,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
-                    'Reset password',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  child: _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text(
+                          'Reset password',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
               ),
             ],
