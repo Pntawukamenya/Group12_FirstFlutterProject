@@ -40,7 +40,6 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
         child: Stack(
           children: [
-            // Background design elements (keep unchanged)
             Positioned(
               top: 0,
               right: 0,
@@ -52,36 +51,11 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
 
-            // Main content - modified to push down
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Increased this height to push content down
-                  const SizedBox(height: 100),
-
-                  // Sign-Up Text
-                  const Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          right: 20.0,
-                          top: 40.0), // Adjust right padding as needed
-                      child: Text(
-                        'Sign-Up',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // Increased this height as well
-                  const SizedBox(height: 70),
 
                   // Email Field
                   Container(
@@ -112,7 +86,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Rest of the fields remain unchanged...
                   // Username Field
                   Container(
                     decoration: BoxDecoration(
@@ -211,7 +184,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/userdashboard');
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFF9A86A),
@@ -239,7 +211,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               Navigator.pushNamed(context, '/signin');
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF023652),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 15),
                               shape: RoundedRectangleBorder(
@@ -272,39 +243,6 @@ class CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF023652)
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
-
-    // Start at upper-left
-    path.moveTo(0, 0);
-
-    // Create a wavy curve by using a cubic bezier with multiple points
-    path.cubicTo(
-        size.width * 0.2,
-        size.height * 0.3, // First control point
-        size.width * 0.4,
-        size.height * -0.1, // Second control point
-        size.width * 0.5,
-        size.height * 0.2 // First destination point
-        );
-
-    // Continue the wave
-    path.cubicTo(
-        size.width * 0.6,
-        size.height * 0.5, // Control point
-        size.width * 0.5,
-        size.height * 0.6, // Control point
-        size.width,
-        size.height * 0.7 // End at middle of right wall
-        );
-
-    // Complete the shape
-    path.lineTo(size.width, 0); // Line to top-right
-    path.close();
-
-    canvas.drawPath(path, paint);
   }
 
   @override
