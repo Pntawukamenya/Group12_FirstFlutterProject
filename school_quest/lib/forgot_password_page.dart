@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -21,30 +21,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     try {
       if (_emailController.text.trim().isEmpty) {
-        throw FirebaseAuthException(
-            code: 'empty-email', message: 'Email cannot be empty');
-      }
+      throw FirebaseAuthException(code: 'empty-email', message: 'Email cannot be empty');
+    }
 
       // Create Dynamic Link parameters
       final DynamicLinkParameters parameters = DynamicLinkParameters(
         uriPrefix: 'https://schoolquest.page.link',
-        link: Uri.parse(
-            'https://schoolquest.page.link/reset?email=${_emailController.text.trim()}'),
+        link: Uri.parse('https://schoolquest.page.link/reset?email=${_emailController.text.trim()}'),
         androidParameters: const AndroidParameters(
           packageName: 'com.example.school_quest',
         ),
       );
 
       // Build short Dynamic Link
-      final ShortDynamicLink shortLink =
-          await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+      final ShortDynamicLink shortLink = await FirebaseDynamicLinks.instance.buildShortLink(parameters);
       final Uri resetUrl = shortLink.shortUrl;
       print('Short link created: ${shortLink.shortUrl}');
       await _auth.sendPasswordResetEmail(email: _emailController.text.trim());
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Password reset email sent successfully')),
       );
-      Navigator.pushNamed(context, '/emailverification');
+      Navigator.pushNamed(context, '/successfulset');
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
@@ -66,7 +63,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,15 +133,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                   child: _isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                          'Reset password',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text(
+                    'Reset password',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -155,3 +151,4 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 }
+  

@@ -311,7 +311,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           BottomNavigationBarItem(
             icon: CircleAvatar(
-              backgroundColor: Color(0xFFF9A86A),
+              backgroundColor: const Color(0xFFF9A86A),
               radius: 14,
               child: Text(
                 'K',
