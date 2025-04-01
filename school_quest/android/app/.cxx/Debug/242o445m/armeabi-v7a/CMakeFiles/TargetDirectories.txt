@@ -1,0 +1,2 @@
+/Users/Shema/Documents/projects/PLV/school_quest/android/app/.cxx/Debug/242o445m/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/Shema/Documents/projects/PLV/school_quest/android/app/.cxx/Debug/242o445m/armeabi-v7a/CMakeFiles/rebuild_cache.dir
