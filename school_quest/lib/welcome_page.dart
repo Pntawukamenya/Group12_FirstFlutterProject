@@ -229,13 +229,90 @@ class HomePage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF4A261),
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               ),
               child: const Text('Go Back'),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class RecommendedSchools extends StatelessWidget {
+  const RecommendedSchools({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // School 1
+        Row(
+          children: [
+            Image.asset(
+              'assets/images/rivi.png',
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'School 1',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+
+        // School 2
+        Row(
+          children: [
+            Image.asset(
+              'assets/images/gha.png',
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'School 2',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+
+        // School 3
+        Row(
+          children: [
+            Image.asset(
+              'assets/images/excella.jpeg',
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'School 3',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

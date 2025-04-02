@@ -88,6 +88,7 @@ flutter:
     - images/google.png
     - images/switch_account.png
     - images/edit_profile.png
+    - images/excella.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
