@@ -3,6 +3,13 @@ SchoolQuest Rwanda is an innovative digital platform designed to bridge the info
 It provides a centralized database of schools across the country, offering detailed insights into their academic programs, leadership, facilities, and extracurricular activities. 
 The platform aims to empower parents, students, and educational stakeholders by enabling them to make informed decisions based on reliable data.
 
+# Group Members
+-Umulisa Jolly
+-Nelly Iyabikoze
+-Diana Ruzindana
+-Grace Munezero
+-Paul Palvis Ntawukamenya
+
 # Getting Started
 To get started with our project, follow these steps:
 
