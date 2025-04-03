@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/palvis/Development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/palvis/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/palvis/PLV/school_quest/android/app/.cxx/RelWithDebInfo/5e5m234p/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/palvis/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/palvis/PLV/school_quest/android/app/.cxx/RelWithDebInfo/5e5m234p/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

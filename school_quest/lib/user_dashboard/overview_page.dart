@@ -22,25 +22,25 @@ class _SchoolListingPageState extends State<SchoolListingPage> {
 
   final List<Map<String, dynamic>> hardcodedSchools = [
     {
-      'name': 'Green Valley High School',
+      'name': 'Riviera High School',
       'location': 'Kigali',
       'admission': true,
       'image': 'images/gv.jpeg',
-      'description': 'A prestigious school offering quality education.',
+      'description': 'A school dedicated to the excellence of your child.',
     },
     {
-      'name': 'Blue Ridge Academy',
-      'location': 'Musanze',
-      'admission': false,
+      'name': 'blue lakes',
+      'location': 'kigali',
+      'admission': true,
       'image': 'images/blue-ridge.jpg',
-      'description': 'Known for its excellent sports programs.',
+      'description': 'boarding school in kigali.',
     },
     {
-      'name': 'Sunrise International School',
-      'location': 'Huye',
+      'name': 'Excella',
+      'location': 'Kacyiru',
       'admission': true,
       'image': 'images/sunrisee.jpeg',
-      'description': 'A school with a focus on international curriculum.',
+      'description': 'High School with multiple programs.',
     },
   ];
 
@@ -181,16 +181,37 @@ class _SchoolListingPageState extends State<SchoolListingPage> {
                     ),
                     const SizedBox(height: 10),
                     Expanded(
-                      child: ListView.builder(
-                        itemCount: hardcodedSchools.length,
-                        itemBuilder: (context, index) {
-                          final school = hardcodedSchools[index];
-                          return SchoolCard(
-                            name: school['name'],
-                            location: school['location'],
-                            isOpen: school['admission'],
-                            imageUrl: school['image'],
-                            description: school['description'],
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('schools')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return const Center(
+                                child: Text('Error loading schools'));
+                          }
+                          if (!snapshot.hasData) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          final schools = snapshot.data!.docs;
+                          return ListView.builder(
+                            itemCount: schools.length,
+                            itemBuilder: (context, index) {
+                              final school =
+                                  schools[index].data() as Map<String, dynamic>;
+                              return SchoolCard(
+                                name: school['name'] ?? 'School',
+                                location:
+                                    school['location'] ?? 'Unknown Location',
+                                isOpen: school['admission'] ==
+                                    true, // Ensure it's a boolean
+                                imageUrl: school['image'] ??
+                                    'https://via.placeholder.com/150',
+                                description: school['description'] ??
+                                    'No description available',
+                              );
+                            },
                           );
                         },
                       ),

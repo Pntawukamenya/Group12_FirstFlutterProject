@@ -156,25 +156,46 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
                   SizedBox(
                     height: 250,
                     child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('schools').snapshots(),
+                      stream: FirebaseFirestore.instance
+                          .collection('schools')
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return const Center(child: Text('Error loading schools'));
+                          return const Center(
+                              child: Text('Error loading schools'));
                         }
                         if (!snapshot.hasData) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
+
                         final schools = snapshot.data!.docs;
+
+                        // List of default images to shuffle
+                        final defaultImages = [
+                          'images/rivi.png',
+                          'images/excel.jpeg',
+                          'images/blue-ridge.jpg'
+                        ];
+                        defaultImages.shuffle(); // Shuffle the images
+
                         return ListView.builder(
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(),
                           itemCount: schools.length,
                           itemBuilder: (context, index) {
-                            final school = schools[index].data() as Map<String, dynamic>;
+                            final school =
+                                schools[index].data() as Map<String, dynamic>;
+
+                            // Assign a default image if the school doesn't have one
+                            final image = school['image'] ??
+                                defaultImages[index % defaultImages.length];
+
                             return schoolCard(
                               school['name'] ?? 'School',
-                              school['image'] ?? 'https://via.placeholder.com/150',
-                              school['description'] ?? 'No description available',
+                              image,
+                              school['description'] ??
+                                  'No description available',
                             );
                           },
                         );
@@ -188,10 +209,13 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
                   ),
                   const SizedBox(height: 20),
                   StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection('reviews').snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection('reviews')
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Center(child: Text('Error loading reviews'));
+                        return const Center(
+                            child: Text('Error loading reviews'));
                       }
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
@@ -199,7 +223,8 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
                       final reviews = snapshot.data!.docs;
                       return Column(
                         children: reviews.map((reviewDoc) {
-                          final review = reviewDoc.data() as Map<String, dynamic>;
+                          final review =
+                              reviewDoc.data() as Map<String, dynamic>;
                           return reviewCard(
                             review['schoolName'] ?? 'Unknown School',
                             review['review'] ?? 'No review available',
@@ -207,7 +232,8 @@ class _SchoolHomePageState extends State<SchoolHomePage> {
                             review['reviewer'] ?? 'Anonymous',
                             review['reviewNumber']?.toString() ?? '0',
                             review['reviewerRole'] ?? 'Unknown Role',
-                            review['image'] ?? 'https://via.placeholder.com/150',
+                            review['image'] ??
+                                'https://via.placeholder.com/150',
                           );
                         }).toList(),
                       );

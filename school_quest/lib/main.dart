@@ -47,13 +47,15 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initDynamicLinks() async {
     // Handle link when app is opened from terminated state
-    final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
+    final PendingDynamicLinkData? initialLink =
+        await FirebaseDynamicLinks.instance.getInitialLink();
     if (initialLink != null) {
       _handleDynamicLink(initialLink);
     }
 
     // Handle links when app is in background/foreground
-    FirebaseDynamicLinks.instance.onLink.listen((PendingDynamicLinkData dynamicLinkData) {
+    FirebaseDynamicLinks.instance.onLink
+        .listen((PendingDynamicLinkData dynamicLinkData) {
       _handleDynamicLink(dynamicLinkData);
     }).onError((error) {
       print('Dynamic Link Failed: $error');
@@ -70,6 +72,7 @@ class _MyAppState extends State<MyApp> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
