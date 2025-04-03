@@ -18,10 +18,11 @@ Explore and Enjoy: Once the application is running, explore its features and fun
 
 # Application structure
 After successful build, your application structure should look like this:
-
+```
 .
 ├── android                         - It contains files required to run the application on an Android platform.
 ├── assets                          - It contains all images and fonts of your application.
 ├── ios                             - It contains files required to run the application on an iOS platform.
 ├── lib                             - Most important folder in the application, used to write most of the Dart code..
     ├── main.dart                   - Starting point of the application
+```
